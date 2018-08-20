@@ -8,7 +8,7 @@
 <body>
     <ul>
         {% for msg in list_messages %}
-        <li>{{ msg.text }}</li>
+        <li>Sent at: {{ msg.time }} / {{ msg.text }}</li>
         {% endfor %}
     </ul>
 </body>

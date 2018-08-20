@@ -30,7 +30,7 @@ class ChatConsumer(WebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
 
-        self.set_name(message)
+        self.save_message(message)
         # Send message to room group
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
@@ -48,7 +48,7 @@ class ChatConsumer(WebsocketConsumer):
             'message': message
         }))
 
-    def set_name(self,message):
+    def save_message(self,message):
         msg = Message()
         msg.text = message
         if msg is not None:
