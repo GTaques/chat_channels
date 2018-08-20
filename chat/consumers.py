@@ -30,6 +30,10 @@ class ChatConsumer(WebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
 
+        msg = Message()
+        msg.text = message
+        if msg is not None:
+            msg.save()
         # Send message to room group
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
@@ -42,10 +46,6 @@ class ChatConsumer(WebsocketConsumer):
     # Receive message from room group
     def chat_message(self, event):
         message = event['message']
-        msg = Message()
-        msg.text = message
-        if msg is not None:
-            msg.save()
         # Send message to WebSocket
         self.send(text_data=json.dumps({
             'message': message
