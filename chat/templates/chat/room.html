@@ -8,9 +8,7 @@
 <body>
     <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
     <input id="chat-message-input" type="text" size="100"/><br/>
-    <form action="{% url 'log_create' %}" method="POST">
-        <input id="chat-message-submit" name="message_text" type="button" value="Send"/>
-    </form>
+    <input id="chat-message-submit" name="message_text" type="button" value="Send"/>
 </body>
 <script>
     var roomName = {{ room_name_json }};

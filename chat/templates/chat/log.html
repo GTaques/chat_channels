@@ -6,25 +6,10 @@
     <title>Chat Room</title>
 </head>
 <body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
+    <ul>
+        {% for msg in list_messages %}
+        <li>{{ msg.text }}</li>
+        {% endfor %}
+    </ul>
 </body>
-<script>
-    var i = 0;   
-    var logSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/log/');
-    
-
-    logSocket.onmessage = function(e) {
-        var data = JSON.parse(e.data);
-        var message = data['message'];
-        document.querySelector('#chat-log').value += ("Message nº " + i + " " + message + '\n');
-        i++;
-    };
-
-    logSocket.onclose = function(e) {
-        console.error('Chat socket closed unexpectedly');
-    };
-
-</script>
 </html>

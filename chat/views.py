@@ -12,10 +12,14 @@ def room(request, room_name):
         'room_name_json': mark_safe(json.dumps(room_name))
     })
 
-def log_create(request):
-    if request.method == 'POST':
-        message = Message()
-        message.text = request.POST['message_text']
-        message.save()
-    else:
-        return render(request, 'chat/log.html', {})
+def log_index(request):
+    list_messages = Message.objects.all()
+    return render(request, 'chat/log.html', {'list_messages': list_messages})
+
+# def log_create(request):
+#     if request.method == 'POST':
+#         message = Message()
+#         message.text = request.POST['message_text']
+#         message.save()
+#     else:
+#         return render(request, 'chat/log.html', {})
